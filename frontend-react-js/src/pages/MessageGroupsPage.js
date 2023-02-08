@@ -4,10 +4,14 @@ import React from "react";
 import DesktopNavigation  from '../components/DesktopNavigation';
 import MessageGroupFeed from '../components/MessageGroupFeed';
 
+// [TODO] Authenication
+import Cookies from 'js-cookie'
+
 export default function MessageGroupsPage() {
   const [messageGroups, setMessageGroups] = React.useState([]);
   const [popped, setPopped] = React.useState([]);
   const [user, setUser] = React.useState(null);
+  const dataFetchedRef = React.useRef(false);
 
   const loadData = async () => {
     try {
@@ -28,9 +32,20 @@ export default function MessageGroupsPage() {
 
   const checkAuth = async () => {
     console.log('checkAuth')
+    // [TODO] Authenication
+    if (Cookies.get('user.logged_in')) {
+      setUser({
+        display_name: Cookies.get('user.name'),
+        handle: Cookies.get('user.username')
+      })
+    }
   };
 
   React.useEffect(()=>{
+    //prevents double call
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+
     loadData();
     checkAuth();
   }, [])

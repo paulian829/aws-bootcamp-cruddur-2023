@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 class MessageGroups:
   def run(user_handle):
     model = {
@@ -6,21 +6,19 @@ class MessageGroups:
       'data': None
     }
 
-    now = datetime.now()
+    now = datetime.now(timezone.utc).astimezone()
     results = [
       {
+        'uuid': '24b95582-9e7b-4e0a-9ad1-639773ab7552',
         'display_name': 'Andrew Brown',
         'handle':  'andrewbrown',
-        'message': 'Cloud is fun!',
-        'created_at': now.isoformat('#'),
-        'expires_at': (now + timedelta(minutes=30)).isoformat('#')  # 30 minutes
+        'created_at': now.isoformat()
       },
       {
-        'display_name': 'Andrew Brown',
-        'handle':  'andrewbrown',
-        'message': 'This platform is great!',
-        'created_at': now.isoformat('#'),
-        'expires_at': (now + timedelta(minutes=60)).isoformat('#')  # 1 hour
+        'uuid': '417c360e-c4e6-4fce-873b-d2d71469b4ac',
+        'display_name': 'Worf',
+        'handle':  'worf',
+        'created_at': now.isoformat()
     }]
     model['data'] = results
     return model
