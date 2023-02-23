@@ -1,0 +1,28 @@
+version: '3'
+services:
+  crudder-frontend:
+    build:
+      context: ./frontend-react-js
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-react-js:/app
+      - /app/node_modules
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:4567
+    depends_on:
+      - crudder-backend
+  crudder-backend:
+    build:
+      context: ./backend-flask
+      dockerfile: Dockerfile
+    ports:
+      - "4567:4567"
+    volumes:
+      - ./backend-flask:/app
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - FRONTEND_URL=*
+      - BACEND_URL=*

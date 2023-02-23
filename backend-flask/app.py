@@ -12,11 +12,12 @@ from services.message_groups import *
 from services.messages import *
 from services.create_message import *
 from services.show_activity import *
+from config import FRONTEND, BACKEND
 
 app = Flask(__name__)
 frontend = os.getenv('FRONTEND_URL')
 backend = os.getenv('BACKEND_URL')
-origins = [frontend, backend]
+origins = [FRONTEND, BACKEND]
 cors = CORS(
   app, 
   resources={r"/api/*": {"origins": origins}},
@@ -24,6 +25,10 @@ cors = CORS(
   allow_headers="content-type,if-modified-since",
   methods="OPTIONS,GET,HEAD,POST"
 )
+
+@app.route('/api/health', methods=['GET'])
+def health():
+  return 'OK',200
 
 @app.route("/api/message_groups", methods=['GET'])
 def data_message_groups():
