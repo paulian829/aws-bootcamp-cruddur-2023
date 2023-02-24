@@ -1,6 +1,8 @@
 import './App.css';
 
 import HomeFeedPage from './pages/HomeFeedPage';
+import NotificationsFeedPAge from './pages/NotificationsFeedPage';
+
 import UserFeedPage from './pages/UserFeedPage';
 import SignupPage from './pages/SignupPage';
 import SigninPage from './pages/SigninPage';
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: "/confirm",
     element: <ConfirmationPage />
+  },
+  {
+    path:'/notifications',
+    element: <NotificationsFeedPAge />
   },
   {
     path: "/forgot",

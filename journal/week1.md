@@ -137,3 +137,25 @@ docker-compose build
 docker-compose up
 
 ```
+
+## OpenAPI
+Updated openapi-3.0.yml file and added new path `/api/activities/notifications`
+
+```
+  /api/activities/notifications:
+    get:
+      description: 'Return a feed of activity for all those that i follow'
+      tags:
+        - activities
+      responses:
+        '200':
+          description: Returns an array of activities"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Activity'
+```
+
+Added new api on backend flask and updated the frontend react
